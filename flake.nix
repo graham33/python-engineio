@@ -19,26 +19,27 @@
         })
       ];
     };
+    python3 = pkgs.python311;
+    python3Packages = python3.pkgs;
+
+    pkg = python3Packages.callPackage ./default.nix {};
   in {
-    devShells.${system}.default = let
-      #inherit (pkgs.nur.repos.graham33) python-engineio_3;
-      python3 = pkgs.python311;
-      python3Packages = python3.pkgs;
-    in pkgs.mkShell {
+    devShells.${system}.default = pkgs.mkShell {
       inputsFrom = [
+        pkg
       ];
       packages = with pkgs; [
         python3
       ] ++ (with python3Packages; [
-        aiohttp
-        eventlet
-        mock
-        pytest
-        requests
-        six
-        tornado
-        websocket-client
-        websockets
+        # aiohttp
+        # eventlet
+        # mock
+        # pytest
+        # requests
+        # six
+        # tornado
+        # websocket-client
+        # websockets
       ]);
     };
   };
