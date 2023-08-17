@@ -172,7 +172,7 @@ class AsyncServer(server.Server):
                 if sid in self.sockets:  # pragma: no cover
                     del self.sockets[sid]
         else:
-            await asyncio.wait([client.close()
+            await asyncio.wait([asyncio.create_task(client.close())
                                 for client in six.itervalues(self.sockets)])
             self.sockets = {}
 

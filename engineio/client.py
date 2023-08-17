@@ -112,8 +112,7 @@ class Client(object):
             self.logger = logger
         else:
             self.logger = default_logger
-            if not logging.root.handlers and \
-                    self.logger.level == logging.NOTSET:
+            if self.logger.level == logging.NOTSET:
                 if logger:
                     self.logger.setLevel(logging.INFO)
                 else:

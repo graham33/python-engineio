@@ -376,9 +376,9 @@ class TestAsyncServer(unittest.TestCase):
         assert packets[0].data['pingTimeout'] == 123000
         assert packets[0].data['pingInterval'] == 456000
 
-    @mock.patch('engineio.asyncio_socket.AsyncSocket')
     @mock.patch('importlib.import_module')
-    def test_connect_bad_poll(self, import_module, AsyncSocket):
+    @mock.patch('engineio.asyncio_socket.AsyncSocket')
+    def test_connect_bad_poll(self, AsyncSocket, import_module):
         a = self.get_async_mock()
         import_module.side_effect = [a]
         AsyncSocket.return_value = self._get_mock_socket()
@@ -388,9 +388,9 @@ class TestAsyncServer(unittest.TestCase):
         assert a._async['make_response'].call_count == 1
         assert a._async['make_response'].call_args[0][0] == '400 BAD REQUEST'
 
-    @mock.patch('engineio.asyncio_socket.AsyncSocket')
     @mock.patch('importlib.import_module')
-    def test_connect_transport_websocket(self, import_module, AsyncSocket):
+    @mock.patch('engineio.asyncio_socket.AsyncSocket')
+    def test_connect_transport_websocket(self, AsyncSocket, import_module):
         a = self.get_async_mock(
             {
                 'REQUEST_METHOD': 'GET',
@@ -410,10 +410,10 @@ class TestAsyncServer(unittest.TestCase):
             == packet.OPEN
         )
 
-    @mock.patch('engineio.asyncio_socket.AsyncSocket')
     @mock.patch('importlib.import_module')
+    @mock.patch('engineio.asyncio_socket.AsyncSocket')
     def test_connect_transport_websocket_closed(
-        self, import_module, AsyncSocket
+        self, AsyncSocket, import_module
     ):
         a = self.get_async_mock(
             {
