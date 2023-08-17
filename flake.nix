@@ -24,6 +24,8 @@
 
     pkg = python3Packages.callPackage ./default.nix {};
   in {
+    packages.${system}.default = pkg;
+
     devShells.${system}.default = pkgs.mkShell {
       inputsFrom = [
         pkg

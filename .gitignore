@@ -44,5 +44,6 @@ tags
 htmlcov
 *.swp
 
-# Direnv
+# Nix and Direnv
+/result*
 /.direnv

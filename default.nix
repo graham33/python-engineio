@@ -20,12 +20,7 @@ buildPythonPackage rec {
   pname = "python-engineio";
   version = "3.14.2";
 
-  src = fetchFromGitHub {
-    owner = "miguelgrinberg";
-    repo = "python-engineio";
-    rev = "v${version}";
-    sha256 = "1r3gvizrknbv036pvxid1l726wkb0l43bdaz5y879s7j3ipyb464";
-  };
+  src = ./.;
 
   propagatedBuildInputs = [
     six
