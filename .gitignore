@@ -43,3 +43,6 @@ tags
 .vscode
 htmlcov
 *.swp
+
+# Direnv
+/.direnv
